@@ -1,0 +1,5 @@
+# default for all files
+*  @dhower-qc @ThinkOpenly
+
+# eclipse Xtext project owned by Ajit Dingankar
+tools/eclipse @adingank-qualcomm @dhower-qc
