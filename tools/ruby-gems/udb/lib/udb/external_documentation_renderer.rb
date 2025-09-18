@@ -363,9 +363,9 @@ class ExternalDocumentationRenderer
         # 2. ID references: [#id] or [#id,ref...]
         # 3. Section attributes: [attribute] (like [bibliography], [appendix], etc.)
         patterns = [
-          /^([[#{Regexp.escape(exclude_item)}(?:,.*?)?]])\s*$/,           # [[id]] or [[id,ref...]]
-          /^([##{Regexp.escape(exclude_item)}[^\]]*])\s*$/,                # [#id] or [#id,ref...]
-          /^([#{Regexp.escape(exclude_item)}])\s*$/                        # [attribute]
+          /^\[\[#{Regexp.escape(exclude_item)}(?:,.*?)?\]\]\s*$/,           # [[id]] or [[id,ref...]]
+          /^\[##{Regexp.escape(exclude_item)}(?:,.*?)?\]\s*$/,              # [#id] or [#id,ref...]
+          /^\[#{Regexp.escape(exclude_item)}\]\s*$/                        # [attribute]
         ]
 
         patterns.each do |pattern|
