@@ -712,6 +712,7 @@ module PrmGenerator
         "-a", "allow-uri-read",
         "-a", "experimental",
         "-r", "asciidoctor-diagram",
+        "-r", "#{(@template_dir / 'pdf-theme' / 'custom_theme_extension.rb').to_s}",
         "-o", pdf_path.to_s,
         adoc_path.to_s
       ]
