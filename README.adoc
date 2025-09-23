@@ -17,7 +17,7 @@ That said, the following data has been validated against third-party sources:
 
 == Quick links
 
-* https://gitsnps.internal.synopsys.com/dwarc/rnd/hardware/rvv/rvv_udb/-/jobs/artifacts/main/raw/gen/prm_pdf/prm_demo_rv32_with_external/pdf/prm_demo_rv32_with_external-specification.pdf?job=pdf[The latest UDB-generated Programmer's Reference Manual (PRM) PDF `Internal`]
+* https://gitsnps.internal.synopsys.com/dwarc/rnd/hardware/rvv/rvv_udb/-/jobs/artifacts/main/raw/gen/prm_pdf/rmx100_prm/pdf/rmx100_prm-specification.pdf?job=pdf[The latest UDB-generated Programmer's Reference Manual (PRM) PDF `Internal`]
 * https://riscv-software-src.github.io/riscv-unified-db/index.html[The latest UDB-generated **UNOFFICIAL** RISC-V specifications].
 * UDB Documentation
 ** xref:doc/schemas.adoc[Schema documentation]
