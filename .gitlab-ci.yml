@@ -15,7 +15,7 @@ default:
 pdf:
   variables:
     DOCKER: y
-    PRM_NAME: prm_demo_rv32_with_external
+    PRM_NAME: rmx100_prm
   script:
     - sed -i 's|docker run|docker run --rm|g' bin/setup
     - ./do prm:pdf[${PRM_NAME}]
