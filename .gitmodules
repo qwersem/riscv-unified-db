@@ -17,3 +17,27 @@
 [submodule "ext/rbi-central"]
 	path = ext/rbi-central
 	url = https://github.com/Shopify/rbi-central
+[submodule "ext/riscv-aia"]
+	path = ext/riscv-aia
+	url = https://github.com/riscv/riscv-aia
+[submodule "ext/riscv-debug-spec"]
+	path = ext/riscv-debug-spec
+	url = https://github.com/riscv/riscv-debug-spec
+[submodule "ext/riscv-elf-psabi-doc"]
+	path = ext/riscv-elf-psabi-doc
+	url = https://github.com/riscv-non-isa/riscv-elf-psabi-doc
+[submodule "ext/riscv-plic-spec"]
+	path = ext/riscv-plic-spec
+	url = https://github.com/riscv/riscv-plic-spec
+[submodule "ext/riscv-profiles"]
+	path = ext/riscv-profiles
+	url = https://github.com/riscv/riscv-profiles
+[submodule "ext/riscv-sbi-doc"]
+	path = ext/riscv-sbi-doc
+	url = https://github.com/riscv-non-isa/riscv-sbi-doc
+[submodule "ext/riscv-security-model"]
+	path = ext/riscv-security-model
+	url = https://github.com/riscv-non-isa/riscv-security-model
+[submodule "ext/tg-nexus-trace"]
+	path = ext/tg-nexus-trace
+	url = https://github.com/riscv-non-isa/tg-nexus-trace

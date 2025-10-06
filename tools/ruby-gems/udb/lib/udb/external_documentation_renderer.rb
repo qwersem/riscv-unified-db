@@ -351,21 +351,21 @@ class ExternalDocumentationRenderer
 
     excludes.each do |exclude_item|
       lines = content.lines
-      start_index = nil
-      heading_level = nil
+      start_index = T.let(nil, T.nilable(Integer))
+      heading_level = T.let(nil, T.nilable(Integer))
 
       # Find the content to exclude by AsciiDoc patterns
       lines.each_with_index do |line, index|
-        match_found = false
+        match_found = T.let(false, T::Boolean)
 
         # Check for various AsciiDoc patterns:
         # 1. ID anchors: [[id]] or [[id,ref...]]
         # 2. ID references: [#id] or [#id,ref...]
         # 3. Section attributes: [attribute] (like [bibliography], [appendix], etc.)
         patterns = [
-          /^(\[\[#{Regexp.escape(exclude_item)}(?:,.*?)?\]\])\s*$/,           # [[id]] or [[id,ref...]]
-          /^(\[##{Regexp.escape(exclude_item)}[^\]]*\])\s*$/,                # [#id] or [#id,ref...]
-          /^(\[#{Regexp.escape(exclude_item)}\])\s*$/                        # [attribute]
+          /^\[\[#{Regexp.escape(exclude_item)}(?:,.*?)?\]\]\s*$/,           # [[id]] or [[id,ref...]]
+          /^\[##{Regexp.escape(exclude_item)}(?:,.*?)?\]\s*$/,              # [#id] or [#id,ref...]
+          /^\[#{Regexp.escape(exclude_item)}\]\s*$/                        # [attribute]
         ]
 
         patterns.each do |pattern|
@@ -374,7 +374,7 @@ class ExternalDocumentationRenderer
             # The next line should be the heading, get its level
             if index + 1 < lines.length
               heading_line = lines[index + 1]
-              if heading_line.match(/^(=+)\s/)
+              if T.must(heading_line).match(/^(=+)\s/)
                 heading_level = $1.length
               end
             end
@@ -388,11 +388,11 @@ class ExternalDocumentationRenderer
 
       if start_index && heading_level
         # Find the end (next heading of same or higher level)
-        end_index = lines.length - 1  # Default to end of document
+        end_index = T.let(lines.length - 1, T.untyped)  # Default to end of document
 
         ((start_index + 2)...lines.length).each do |index|
           line = lines[index]
-          if line.match(/^(=+)\s/) && $1.length <= heading_level
+          if T.must(line).match(/^(=+)\s/) && $1.length <= heading_level
             end_index = index - 1
             break
           end

@@ -1,0 +1,301 @@
+# Copyright (c) Synopsys Inc.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
+
+# yaml-language-server: $schema=../../../schemas/prm_schema.json
+---
+$schema: prm_schema.json#
+kind: programmer reference manual
+name: rmx100
+description: |
+  An improved Programmer's Reference Manual for the RMX-100 RISC-V processor configuration
+  that demonstrates integration of external documentation, comprehensive ISA coverage,
+  and RMX-100 specific features based on the configurable template architecture.
+
+processor_config:
+  $ref: ../../../../cfgs/rmx100.yaml#
+
+chapters:
+  - id: front_matter
+    title: "Front Matter"
+    level: 2
+    type: standard
+    description: "Preface, introduction, and processor overview"
+    non_isa_specifications:
+      - name: "preface_demo"
+        version: ">= 0"
+
+  - id: unprivileged_isa
+    title: "Unprivileged Instruction Set Architecture"
+    level: 2
+    type: standard
+    description: "RISC-V base instruction set and unprivileged extensions supported by RMX-100"
+    external_documentation:
+      - source: "riscv-isa-manual"
+        type: "isa_manual"
+        path: "ext/riscv-isa-manual/src"
+        resolve_includes: true
+        chapters:
+          # Mandatory baseline extensions (RV32I + mandatory extensions)
+          - file: "rv32.adoc"
+            level_offset: 1
+          - file: "zicsr.adoc"
+            level_offset: 1
+          - file: "zifencei.adoc"
+            level_offset: 1
+          - file: "zihintpause.adoc"
+            level_offset: 1
+          - file: "cmo.adoc"
+            level_offset: 1
+            exclude_content: ["insns"]
+          - file: "zicond.adoc"
+            level_offset: 1
+            exclude_content: ["insns-czero-nez", "insns-czero-eqz"]
+          # Zce and bit manipulation extensions
+          - file: "zc.adoc"
+            level_offset: 1
+            exclude_content: ["Zcb_instructions"]
+          - file: "b-st-ext.adoc"
+            level_offset: 1
+            exclude_content: ["insns-b"]
+          # Optional extensions (configurable based on template)
+          - file: "a-st-ext.adoc"
+            level_offset: 1
+          - file: "m-st-ext.adoc"
+            level_offset: 1
+          - file: "zfinx.adoc"
+            level_offset: 1
+          # Memory ordering
+          - file: "rvwmo.adoc"
+            level_offset: 1
+          # Vector and Scalar Cryptography Extensions
+          - file: "v-st-ext.adoc"
+            level_offset: 1
+          - file: "scalar-crypto.adoc"
+            level_offset: 1
+            exclude_content: ["crypto_scalar_insns"]
+
+  - id: privileged_isa
+    title: "Privileged Instruction Set Architecture"
+    level: 2
+    type: standard
+    description: "RISC-V privileged architecture and RMX-100 CSR implementations"
+    external_documentation:
+      - source: "riscv-isa-manual"
+        type: "isa_manual"
+        path: "ext/riscv-isa-manual/src"
+        resolve_includes: true
+        chapters:
+          - file: "machine.adoc"
+            level_offset: 1
+          - file: "supervisor.adoc"
+            level_offset: 1
+          # Hypervisor Extension
+          - file: "hypervisor.adoc"
+            level_offset: 1
+          # Indirect CSR Access Extensions
+          - file: "indirect-csr.adoc"
+            level_offset: 1
+          # Smepmp Extension
+          - file: "smepmp.adoc"
+            level_offset: 1
+          # Sstc Extension
+          - file: "sstc.adoc"
+            level_offset: 1
+          # Double Trap Extension
+          - file: "ssdbltrp.adoc"
+            level_offset: 1
+
+  - id: abi_and_calling_conventions
+    title: "Application Binary Interface"
+    level: 2
+    type: standard
+    description: "RISC-V ABI and calling conventions for RMX-100"
+    external_documentation:
+      - source: "riscv-elf-psabi-doc"
+        type: "external_spec"
+        path: "ext/riscv-elf-psabi-doc"
+        version: ">= 1.0"
+        resolve_includes: true
+        chapters:
+          - file: "introduction.adoc"
+            level_offset: 2
+          - file: "riscv-cc.adoc"
+            level_offset: 2
+            exclude_content: ["bibliography", "appendix"]
+          - file: "riscv-elf.adoc"
+            level_offset: 2
+            exclude_content: ["bibliography"]
+
+  - id: architecture_profiles
+    title: "RISC-V Architecture Profiles"
+    level: 2
+    type: standard
+    description: "RISC-V standardized architecture profiles supported by RMX-100"
+    external_documentation:
+      - source: "riscv-profiles"
+        type: "external_spec"
+        path: "ext/riscv-profiles/src"
+        version: ">= 1.0"
+        resolve_includes: true
+        chapters:
+          - file: "profiles.adoc"
+            level_offset: 2
+          - file: "RVA-profile-overview.adoc"
+            level_offset: 2
+          - file: "rva23-profile.adoc"
+            level_offset: 2
+          - file: "rvb23-profile.adoc"
+            level_offset: 2
+          - file: "rvm23-profile.adoc"
+            level_offset: 2
+
+  - id: debug_architecture
+    title: "Debug and Trace Architecture"
+    level: 2
+    type: standard
+    description: "RISC-V debug specification and trace support for RMX-100"
+    external_documentation:
+      - source: "riscv-debug-spec"
+        type: "external_spec"
+        path: "ext/riscv-debug-spec"
+        version: ">= 1.0"
+        resolve_includes: false
+        chapters:
+          - file: "introduction.adoc"
+            level_offset: 1
+          - file: "overview.adoc"
+            level_offset: 1
+          - file: "dtm.adoc"
+            level_offset: 1
+          - file: "jtagdtm.adoc"
+            level_offset: 1
+          - file: "debug_module.adoc"
+            level_offset: 1
+          - file: "Sdext.adoc"
+            level_offset: 1
+          - file: "Sdtrig.adoc"
+            level_offset: 1
+
+  - id: interrupt_architecture
+    title: "Advanced Interrupt Architecture"
+    level: 2
+    type: standard
+    description: "RISC-V Advanced Interrupt Architecture (AIA) for RMX-100"
+    external_documentation:
+      - source: "riscv-aia"
+        type: "external_spec"
+        path: "ext/riscv-aia/src"
+        version: ">= 1.0"
+        resolve_includes: true
+        chapters:
+          - file: "intro.adoc"
+            level_offset: 1
+          - file: "IMSIC.adoc"
+            level_offset: 1
+          - file: "AdvPLIC.adoc"
+            level_offset: 1
+          - file: "DuoPLIC.adoc"
+            level_offset: 1
+          - file: "CSRs.adoc"
+            level_offset: 1
+          - file: "MSLevel.adoc"
+            level_offset: 1
+          - file: "VSLevel.adoc"
+            level_offset: 1
+          - file: "IPIs.adoc"
+            level_offset: 1
+          - file: "IOMMU.adoc"
+            level_offset: 1
+
+  - id: supervisor_binary_interface
+    title: "Supervisor Binary Interface"
+    level: 2
+    type: standard
+    description: "RISC-V SBI specification for RMX-100 system software interface"
+    external_documentation:
+      - source: "riscv-sbi-doc"
+        type: "external_spec"
+        path: "ext/riscv-sbi-doc/src"
+        version: ">= 1.0"
+        resolve_includes: true
+        chapters:
+          - file: "intro.adoc"
+            level_offset: 1
+          - file: "binary-encoding.adoc"
+            level_offset: 1
+          - file: "ext-base.adoc"
+            level_offset: 1
+          - file: "ext-time.adoc"
+            level_offset: 1
+          - file: "ext-ipi.adoc"
+            level_offset: 1
+          - file: "ext-rfence.adoc"
+            level_offset: 1
+          - file: "ext-hsm.adoc"
+            level_offset: 1
+          - file: "ext-sys-reset.adoc"
+            level_offset: 1
+          - file: "ext-sys-suspend.adoc"
+            level_offset: 1
+          - file: "ext-pmu.adoc"
+            level_offset: 1
+          - file: "ext-debug-console.adoc"
+            level_offset: 1
+          - file: "ext-cppc.adoc"
+            level_offset: 1
+
+  - id: security_model
+    title: "Security Model and Features"
+    level: 2
+    type: standard
+    description: "RISC-V security model specification for RMX-100"
+    external_documentation:
+      - source: "riscv-security-model"
+        type: "external_spec"
+        path: "ext/riscv-security-model/specification/src"
+        version: ">= 1.0"
+        resolve_includes: true
+        chapters:
+          - file: "chapter1.adoc"
+            level_offset: 1
+          - file: "chapter2.adoc"
+            level_offset: 1
+          - file: "chapter3.adoc"
+            level_offset: 1
+          - file: "chapter4.adoc"
+            level_offset: 1
+          - file: "chapter5.adoc"
+            level_offset: 1
+
+  - id: trace_architecture
+    title: "Nexus Trace Architecture"
+    level: 2
+    type: standard
+    description: "RISC-V Nexus Trace specification for RMX-100 debugging and analysis"
+    external_documentation:
+      - source: "tg-nexus-trace"
+        type: "external_spec"
+        path: "ext/tg-nexus-trace/docs"
+        version: ">= 1.0"
+        resolve_includes: true
+        chapters:
+          - file: "RISC-V-N-Trace.adoc"
+            level_offset: 2
+          - file: "RISC-V-Trace-Control-Interface.adoc"
+            level_offset: 2
+          - file: "RISC-V-Trace-Connectors.adoc"
+            level_offset: 2
+
+  - id: instruction_reference
+    title: "Instruction Reference"
+    level: 2
+    type: appendix
+    auto_generate: ["instructions"]
+    description: "Complete reference of all supported instructions based on configuration"
+
+  - id: csr_reference
+    title: "Control and Status Registers Reference"
+    level: 2
+    type: appendix
+    auto_generate: ["csrs"]
+    description: "Complete reference of all control and status registers"

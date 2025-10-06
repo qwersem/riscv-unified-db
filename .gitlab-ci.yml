@@ -1,0 +1,29 @@
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_PIPELINE_SOURCE == 'push' &&
+        $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == 'web'
+    - if: $CI_COMMIT_TAG
+
+default:
+  retry:
+    max: 2
+    when: runner_system_failure
+    exit_codes: 137
+
+pdf:
+  variables:
+    DOCKER: y
+    PRM_NAME: rmx100_prm
+  script:
+    - sed -i 's|docker run|docker run --rm|g' bin/setup
+    - ./do prm:pdf[${PRM_NAME}]
+  artifacts:
+    name: ${PRM_NAME}-specification.pdf
+    paths:
+      - gen/prm_pdf/${PRM_NAME}/pdf/${PRM_NAME}-specification.pdf
+    expire_in: 1 week
+    when: always
+  tags:
+    - rvv_udb
